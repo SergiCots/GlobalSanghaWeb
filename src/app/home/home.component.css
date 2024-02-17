@@ -1,0 +1,12 @@
+/* home.component.css */
+.home-container {
+  text-align: center;
+  margin-top: 50px;
+}
+
+.navigation button {
+  margin: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
