@@ -1,21 +1,29 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
-import {RouterLink} from "@angular/router";
+import { Router, RouterModule } from '@angular/router'; // Usa RouterModule si necesitas enlaces de rutas
+import { CommonModule } from '@angular/common'; // Importa CommonModule
+import { AuthService } from "../auth.service";
 
 @Component({
   selector: 'app-login',
   standalone: true,
   imports: [
     ReactiveFormsModule,
-    RouterLink
+    CommonModule, // Añade CommonModule para *ngIf
+    RouterModule // Añade RouterModule si usas enlaces de ruta en la plantilla
   ],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css'] // Corrige a 'styleUrls' (es plural)
 })
 export class LoginComponent {
   loginForm: FormGroup;
+  errorMessage: string = ''; // Para almacenar y mostrar mensajes de error
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(
+    private formBuilder: FormBuilder,
+    private authService: AuthService,
+    private router: Router // Inyecta el Router para redireccionar
+  ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required, Validators.minLength(6)]]
@@ -24,10 +32,18 @@ export class LoginComponent {
 
   onSubmit(): void {
     if (this.loginForm.valid) {
-      // Implementa tu lógica de autenticación
-      console.log('Login successful', this.loginForm.value);
+      this.authService.login(this.loginForm.value.email, this.loginForm.value.password).subscribe({
+        next: (response) => {
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          this.errorMessage = 'Error de autenticación. Verifique sus credenciales.';
+        }
+      });
     } else {
-      console.log('Invalid form data');
+      this.errorMessage = 'Por favor, rellene todos los campos correctamente.';
     }
   }
+
+
 }

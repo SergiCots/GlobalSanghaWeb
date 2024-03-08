@@ -2,8 +2,12 @@
 <div class="home-container">
   <h1>Bienvenido a GlobalSanghaWeb</h1>
   <p>Conéctate con la comunidad global.</p>
-  <div class="navigation">
+  <div class="navigation"*ngIf="!welcomeMessage">
     <button routerLink="/login">Iniciar sesión</button>
     <button routerLink="/register">Registrarse</button>
+  </div>
+  <div *ngIf="welcomeMessage">
+    <p>{{ welcomeMessage }}</p>
+    <button (click)="logout()">Logout</button>
   </div>
 </div>

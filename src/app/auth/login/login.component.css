@@ -1,4 +1,5 @@
 .login-container {
+  position: relative;
   max-width: 400px;
   margin: 2rem auto;
   padding: 2rem;
@@ -45,4 +46,34 @@
 
 .login-container button {
   margin-top: 1rem;
+}
+
+.back-button {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  width: 30px; /* Tamaño del botón */
+  height: 30px; /* Tamaño del botón */
+  border-radius: 50%; /* Borde redondo */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background-color: #ffffff; /* Cambia al color de fondo que prefieras */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Sombra suave opcional */
+  cursor: pointer;
+}
+
+.back-button i {
+  font-size: 16px; /* Tamaño del icono */
+  color: #333; /* Color del icono */
+}
+
+.back-button:hover {
+  background-color: #f8f8f8; /* Color de fondo al pasar el mouse */
+}
+
+.error-message {
+    color: red;
+    margin-top: 10px;
 }
