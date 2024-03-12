@@ -1,0 +1,25 @@
+<div class="tool-form-modal">
+  <form [formGroup]="toolForm" (ngSubmit)="onSubmit()">
+    <div>
+      <label for="name">Nombre:</label>
+      <input formControlName="name" id="name" type="text" required>
+    </div>
+    <div>
+      <label for="description">Descripción:</label>
+      <textarea formControlName="description" id="description"></textarea>
+    </div>
+    <div>
+      <label for="status">Estado:</label>
+      <select formControlName="status" id="status" required>
+        <option value="nuevo">Nuevo</option>
+        <option value="usado">Usado</option>
+        <option value="roto">Roto</option>
+      </select>
+    </div>
+    <div>
+      <label for="available">Disponible:</label>
+      <input formControlName="available" id="available" type="checkbox">
+    </div>
+    <button type="submit">Añadir Herramienta</button>
+  </form>
+</div>

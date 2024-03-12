@@ -2,12 +2,35 @@
 <div class="home-container">
   <h1>Bienvenido a GlobalSanghaWeb</h1>
   <p>Conéctate con la comunidad global.</p>
-  <div class="navigation"*ngIf="!welcomeMessage">
+  <div class="navigation" *ngIf="!welcomeMessage">
     <button routerLink="/login">Iniciar sesión</button>
     <button routerLink="/register">Registrarse</button>
   </div>
   <div *ngIf="welcomeMessage">
     <p>{{ welcomeMessage }}</p>
+    <!-- Botón para añadir herramienta -->
+    <button (click)="showAddTool = true">Añadir Herramienta</button>
+    <app-add-tool-form *ngIf="showAddTool" (toolAdded)="addTool($event)"></app-add-tool-form>
     <button (click)="logout()">Logout</button>
+    <!-- Tabla de herramientas del usuario -->
+    <table *ngIf="userTools.length > 0">
+      <thead>
+      <tr>
+        <th>Nombre</th>
+        <th>Descripción</th>
+        <th>Estado</th>
+        <th>Disponible</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let tool of userTools">
+        <td>{{ tool.name }}</td>
+        <td>{{ tool.description }}</td>
+        <td>{{ tool.status }}</td>
+        <td>{{ tool.available ? 'Sí' : 'No' }}</td>
+      </tr>
+      </tbody>
+    </table>
+    <p *ngIf="userTools.length == 0">No tienes herramientas registradas.</p>
   </div>
 </div>
